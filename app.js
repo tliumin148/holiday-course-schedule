@@ -22,7 +22,7 @@ function render(){
   $('#weekRange').textContent = `${formatDate(dates[0])} — ${formatDate(dates[6])}`;
   const todayKey = key(new Date());
   let html = '<div class="time-label">时段</div>' + dates.map((d,i)=>`<div class="day-head ${key(d)===todayKey?'today':''}">${DAYS[i]}<b>${d.getDate()}</b></div>`).join('');
-  const periods=[{name:'上午',start:480,end:720,time:'08:00'},{name:'下午',start:780,end:1020,time:'13:00'},{name:'晚上',start:1050,end:1440,time:'17:30'}];
+  const periods=[{name:'🌞 上午',start:480,end:720,time:'08:00'},{name:'🍉 下午',start:780,end:1020,time:'13:00'},{name:'🌙 晚上',start:1050,end:1440,time:'17:30'}];
   periods.forEach(period=>{
     html += `<div class="time-label period-label">${period.name}</div>`;
     dates.forEach(d=>{const list=coursesOn(d).filter(c=>minutes(c.start)<period.end && minutes(c.end)>period.start);html += `<div class="grid-cell period-cell" data-date="${key(d)}" data-time="${period.time}">${list.map(c=>`<button class="course-chip ${c.color}" data-id="${c.id}">${c.name}<small>${c.start}–${c.end}</small></button>`).join('')}</div>`});
@@ -33,7 +33,7 @@ function render(){
   renderMobileSchedule(dates); renderToday(); renderRecord(); renderScheduleList();
 }
 function renderMobileSchedule(dates){
-  const date=dates[mobileDayIndex]||dates[0], periods=[{name:'上午',start:480,end:720,time:'08:00'},{name:'下午',start:780,end:1020,time:'13:00'},{name:'晚上',start:1050,end:1440,time:'17:30'}];
+  const date=dates[mobileDayIndex]||dates[0], periods=[{name:'🌞 上午',start:480,end:720,time:'08:00'},{name:'🍉 下午',start:780,end:1020,time:'13:00'},{name:'🌙 晚上',start:1050,end:1440,time:'17:30'}];
   const periodCards=(day,compact=false)=>periods.map(p=>{const list=coursesOn(day).filter(c=>minutes(c.start)<p.end&&minutes(c.end)>p.start);return `<section class="mobile-period ${compact?'week-period':''}"><h3>${p.name}</h3><div>${list.length?list.map(c=>`<button class="mobile-course ${c.color}" data-id="${c.id}"><span>${c.name}</span><small>${c.start}–${c.end}</small></button>`).join(''):`<button class="mobile-empty" data-mobile-add="${p.time}" data-mobile-date="${key(day)}">＋ 添加课程</button>`}</div></section>`}).join('');
   const switcher=`<div class="mobile-view-switch"><button class="${mobileView==='day'?'active':''}" data-mobile-view="day">日视图</button><button class="${mobileView==='week'?'active':''}" data-mobile-view="week">周视图</button></div>`;
   const dayTabs=`<div class="mobile-days">${dates.map((d,i)=>`<button class="${i===mobileDayIndex?'active':''}" data-mobile-day="${i}"><span>周${DAYS[i]}</span><b>${d.getDate()}</b></button>`).join('')}</div>`;
