@@ -1,1 +1,1 @@
-{"name":"holiday-course-schedule","private":true,"scripts":{"start":"node server.js"},"engines":{"node":">=20"}}
+{"name":"holiday-course-schedule","private":true,"scripts":{"start":"node server.js","build":"node copy-static.js"},"engines":{"node":">=20"}}
