@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>假期课程表</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">HOLIDAY PLANNER</p>
+        <h1>假期课程表 <span>☀</span></h1>
+        <p class="subtitle">把每一天安排得清清楚楚，也留一点空白给快乐。</p>
+      </div>
+      <div class="vacation-switch" role="group" aria-label="选择假期">
+        <button class="season active" data-season="summer">暑假</button>
+        <button class="season" data-season="winter">寒假</button>
+      </div>
+    </section>
+
+    <section class="dashboard">
+      <div class="today-card">
+        <div class="today-label">今天</div>
+        <div id="todayDate" class="today-date"></div>
+        <div id="todayCourses" class="today-courses"></div>
+      </div>
+      <div class="stat-card"><span>本周课程</span><strong id="weekCount">0</strong><small>节</small></div>
+      <div class="stat-card"><span>已完成</span><strong id="doneCount">0</strong><small>节</small></div>
+      <button id="addCourse" class="add-button"><b>＋</b> 添加日程</button>
+    </section>
+
+    <section class="main-grid">
+      <div class="panel schedule-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">WEEKLY SCHEDULE</p>
+            <h2>每周日程</h2>
+          </div>
+          <div class="week-controls">
+            <button id="prevWeek" aria-label="上一周">‹</button>
+            <strong id="weekRange"></strong>
+            <button id="nextWeek" aria-label="下一周">›</button>
+          </div>
+        </div>
+        <div class="schedule-wrap"><div id="schedule" class="schedule"></div></div>
+        <div id="mobileSchedule" class="mobile-schedule"></div>
+      </div>
+
+      <aside class="panel record-panel">
+        <div class="panel-heading compact">
+          <div><p class="eyebrow">TODAY'S CLASSES</p><h2>今日课程</h2></div>
+        </div>
+        <label class="date-picker">选择日期 <input id="recordDate" type="date" /></label>
+        <div id="recordList" class="record-list"></div>
+        <section class="schedule-manager">
+          <div class="manager-heading"><span>日程管理</span><small>修改或删除整条日程</small></div>
+          <div id="scheduleList" class="schedule-list"></div>
+        </section>
+        <div class="notes">
+          <label for="noteInput">今天的小记</label>
+          <textarea id="noteInput" placeholder="例如：英语课表现很棒，记得明天复习单词…"></textarea>
+          <button id="saveNote">保存小记</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <dialog id="courseDialog">
+    <form id="courseForm" method="dialog">
+      <div class="dialog-heading"><h2 id="dialogTitle">添加日程</h2><button type="button" id="closeDialog" aria-label="关闭">×</button></div>
+      <input id="editingId" type="hidden" />
+      <label>日程名称<input id="courseName" required placeholder="例如：少儿英语" /></label>
+      <div class="date-row"><label>开始日期<input id="startDate" required type="date" /></label><label>结束日期<input id="endDate" required type="date" /></label></div>
+      <fieldset class="weekday-picker"><legend>每周上课日</legend><div id="weekdayOptions" class="weekday-options"><label><input type="checkbox" value="1">周一</label><label><input type="checkbox" value="2">周二</label><label><input type="checkbox" value="3">周三</label><label><input type="checkbox" value="4">周四</label><label><input type="checkbox" value="5">周五</label><label><input type="checkbox" value="6">周六</label><label><input type="checkbox" value="0">周日</label></div></fieldset>
+      <div class="time-row"><label>开始时间<input id="startTime" required type="time" value="09:00" /></label><label>结束时间<input id="endTime" required type="time" value="10:00" /></label></div>
+      <label>日程颜色<select id="courseColor"><option value="orange">活力橙</option><option value="blue">天空蓝</option><option value="green">薄荷绿</option><option value="purple">葡萄紫</option><option value="pink">莓果粉</option></select></label>
+      <label>备注（可选）<input id="courseNote" placeholder="地点、老师或需要携带的物品" /></label>
+      <div class="dialog-actions"><button type="button" id="deleteCourse" class="delete">删除</button><button class="save" value="default">保存日程</button></div>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
